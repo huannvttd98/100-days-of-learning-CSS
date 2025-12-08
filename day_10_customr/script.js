@@ -80,10 +80,13 @@ const startCountdown = () => {
     const countdownDisplay = document.querySelector('.countdown-display');
     const countdownNumber = document.querySelector('.countdown-number');
     const frameWin = document.querySelector('.frame-win');
+    const textWin = document.querySelector('.win-text');
+
 
     // Hide button and show countdown
     openButton.style.display = 'none';
     countdownDisplay.style.display = 'flex';
+    textWin.style.display = 'none';
 
     let count = 5;
 
@@ -103,6 +106,7 @@ const startCountdown = () => {
             // Hide countdown and show win effect
             countdownDisplay.style.display = 'none';
             frameWin.style.display = 'block';
+            textWin.style.display = 'block';
 
             // Set background to black for win effect
             document.body.style.background = '#000';
