@@ -41,6 +41,7 @@ body {
   background: repeating-conic-gradient(
     from 0deg,
     rgba(255, 255, 255, 0.08) 0deg,
+    rgba(255, 255, 255, 0) 1deg,
     rgba(255, 255, 255, 0) 5deg
   );
   animation: spin 20s linear infinite;
