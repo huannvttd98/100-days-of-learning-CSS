@@ -1,3 +1,4 @@
+// Create falling dots
 for (let i = 0; i < 30; i++) {
     let d = document.createElement("div");
     d.className = "dot";
@@ -34,3 +35,39 @@ for (let i = 0; i < 30; i++) {
 
     document.body.appendChild(d);
 }
+
+// Create circular dots around win-text
+const circleContainer = document.querySelector('.circle-dots');
+const numberOfDots = 12;
+const radius = 180;
+const colors = ["#fff", "#ffdd57", "#00f3d5", "#ff6b35", "#4caf50", "#e91e63", "#9c27b0", "#ff9800"];
+
+for (let i = 0; i < numberOfDots; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'circle-dot';
+
+    // Calculate position on circle
+    const angle = (360 / numberOfDots) * i;
+    const radian = (angle * Math.PI) / 180;
+    const x = radius * Math.cos(radian);
+    const y = radius * Math.sin(radian);
+
+    // Position the dot
+    dot.style.left = `calc(50% + ${x}px)`;
+    dot.style.top = `calc(50% + ${y}px)`;
+    dot.style.transform = 'translate(-50%, -50%)';
+
+    // Add random color and glow
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    dot.style.background = randomColor;
+    dot.style.color = randomColor;
+    dot.style.boxShadow = `0 0 15px ${randomColor}`;
+
+    // Add staggered animation delay
+    dot.style.animationDelay = `${i * 0.1}s`;
+
+    circleContainer.appendChild(dot);
+}
+
+// Animate the entire circle
+circleContainer.style.animation = 'rotateCircle 8s linear infinite';
