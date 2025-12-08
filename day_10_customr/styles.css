@@ -1,7 +1,7 @@
 body {
   margin: 0;
   height: 100vh;
-  background: #000;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -198,4 +198,70 @@ body {
     transform: translateY(100vh) scale(0.5);
     opacity: 0;
   }
+}
+
+.frame-win , .frame-count{
+    display: none;
+}
+
+/* Countdown Display */
+.countdown-display {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.countdown-number {
+    font-family: "Dancing Script", cursive;
+    font-size: 200px;
+    font-weight: bold;
+    color: #ffd645;
+    text-shadow: 0 0 30px #ffdd57, 0 0 60px #ffcc33;
+    animation: countdownPulse 1s ease-in-out;
+}
+
+@keyframes countdownPulse {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Button styling */
+.open-modal-win {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    font-size: 18px;
+    background: #ffd645;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 214, 69, 0.3);
+    transition: all 0.3s ease;
+}
+
+.open-modal-win:hover {
+    background: #ffcc33;
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 214, 69, 0.5);
 }
