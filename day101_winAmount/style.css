@@ -1,0 +1,104 @@
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
+  border-radius: 2px;
+  box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+  background: #46a6da;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.notify-amount-win {
+  height: 120px;
+  width: 120px;
+  font-weight: bold;
+  background-color: #fff;
+  text-align: center;
+  clip-path: circle(60px at 50% 50%);
+}
+
+.octa-sparkles {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 100px;
+  left: 100px;
+  animation: octa-sparkle 5s ease-in-out infinite;
+}
+.octa-sparkles .sparkle {
+  position: absolute;
+  top: 0;
+  left: 98px;
+  width: 4px;
+  height: 200px;
+}
+.octa-sparkles .sparkle:before, .octa-sparkles .sparkle:after {
+  display: block;
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 25px;
+  top: 0;
+  left: 0;
+  border-radius: 2px;
+  background: #fff;
+}
+.octa-sparkles .sparkle:after {
+  top: auto;
+  bottom: 0;
+}
+.octa-sparkles .s2 {
+  transform: rotate(45deg);
+}
+.octa-sparkles .s3 {
+  transform: rotate(90deg);
+}
+.octa-sparkles .s4 {
+  transform: rotate(135deg);
+}
+
+@keyframes octa-sparkle {
+  0%, 30% {
+    transform: translate3d(0, 0, 0) scale(0);
+    opacity: 1;
+  }
+  36% {
+    opacity: 1;
+  }
+  40%, 100% {
+    transform: translate3d(0, 0, 0) scale(1.4);
+    opacity: 0;
+  }
+}
+@keyframes triangle {
+  0%, 52% {
+    transform: translate3d(0, 0, 0) scale(0);
+  }
+  58% {
+    transform: translate3d(0, 0, 0) scale(1.2);
+  }
+  62% {
+    transform: translate3d(0, 0, 0) scale(0.9);
+  }
+  64%, 66% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  70% {
+    transform: translate3d(0, 0, 0) scale(1.2);
+  }
+  76%, 100% {
+    transform: translate3d(0, 0, 0) scale(0);
+  }
+}/*# sourceMappingURL=style.css.map */
