@@ -13,7 +13,6 @@ body {
 .win-text {
   font-family: "Dancing Script", cursive;
   font-optical-sizing: auto;
-
   font-style: normal;
   font-size: 90px;
   font-weight: bold;
@@ -22,6 +21,10 @@ body {
   position: absolute;
   z-index: 10;
   animation: glow 2s infinite alternate;
+  white-space: nowrap;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @keyframes glow {
@@ -88,6 +91,9 @@ body {
   position: absolute;
   width: 2000px;
   height: 2000px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: repeating-conic-gradient(
     from 0deg,
     rgba(223, 208, 6, 0.08) 0deg,
@@ -100,10 +106,10 @@ body {
 
 @keyframes spin {
   from {
-    transform: rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
@@ -202,6 +208,26 @@ body {
 
 .frame-win , .frame-count{
     display: none;
+}
+
+/* Frame count styling */
+.frame-count , .frame-win{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.count-text {
+    font-family: "Dancing Script", cursive;
+    font-size: 48px;
+    font-weight: bold;
+    color: #ffd645;
+    text-shadow: 0 0 20px #ffdd57, 0 0 40px #ffcc33;
+    text-align: center;
 }
 
 /* Countdown Display */
