@@ -1,8 +1,14 @@
+// Animation state
+let isAnimationEnabled = true;
+let animationElements = [];
+
 // Create falling dots
 const addAnimation = () => {
+    // Clear existing animation elements
+    clearAnimation();
     for (let i = 0; i < 30; i++) {
         let d = document.createElement("div");
-        d.className = "dot";
+        d.className = "dot animated-element";
 
         // Start position at top, random horizontal position
         d.style.top = "-10px";
@@ -18,8 +24,10 @@ const addAnimation = () => {
         const randomFall =
             fallAnimations[Math.floor(Math.random() * fallAnimations.length)];
 
-        d.style.animation = `flicker ${flickerDuration}s infinite alternate, ${randomFall} ${fallDuration}s infinite linear`;
-        d.style.animationDelay = `${delay}s, ${delay}s`;
+        if (isAnimationEnabled) {
+            d.style.animation = `flicker ${flickerDuration}s infinite alternate, ${randomFall} ${fallDuration}s infinite linear`;
+            d.style.animationDelay = `${delay}s, ${delay}s`;
+        }
 
         // Add random colors
         const colors = ["#fff", "#ffdd57", "#00f3d5", "#ff6b35", "#4caf50", "#e91e63", "#9c27b0"];
@@ -35,6 +43,7 @@ const addAnimation = () => {
         d.style.height = size + "px";
 
         document.body.appendChild(d);
+        animationElements.push(d);
     }
 
     // Create circular dots around win-text
@@ -45,7 +54,7 @@ const addAnimation = () => {
 
     for (let i = 0; i < numberOfDots; i++) {
         const dot = document.createElement('div');
-        dot.className = 'circle-dot';
+        dot.className = 'circle-dot animated-element';
 
         // Calculate position on circle
         const angle = (360 / numberOfDots) * i;
@@ -65,13 +74,56 @@ const addAnimation = () => {
         dot.style.boxShadow = `0 0 15px ${randomColor}`;
 
         // Add staggered animation delay
-        dot.style.animationDelay = `${i * 0.1}s`;
+        if (isAnimationEnabled) {
+            dot.style.animationDelay = `${i * 0.1}s`;
+        }
 
         circleContainer.appendChild(dot);
     }
 
     // Animate the entire circle
-    circleContainer.style.animation = 'rotateCircle 8s linear infinite';
+    if (isAnimationEnabled) {
+        circleContainer.style.animation = 'rotateCircle 8s linear infinite';
+    }
 };
 
-document.addEventListener("DOMContentLoaded", addAnimation);
+// Clear all animation elements
+const clearAnimation = () => {
+    // Remove falling dots
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach(dot => dot.remove());
+
+    // Clear circle dots
+    const circleContainer = document.querySelector('.circle-dots');
+    if (circleContainer) {
+        circleContainer.innerHTML = '';
+        circleContainer.style.animation = 'none';
+    }
+
+    animationElements = [];
+};
+
+// Toggle animation on/off
+const toggleAnimation = () => {
+    isAnimationEnabled = !isAnimationEnabled;
+    const toggleBtn = document.getElementById('animationToggle');
+
+    if (isAnimationEnabled) {
+        toggleBtn.textContent = 'Tắt hiệu ứng';
+        addAnimation();
+    } else {
+        toggleBtn.textContent = 'Bật hiệu ứng';
+        clearAnimation();
+    }
+};
+
+// Initialize
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById('animationToggle');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', toggleAnimation);
+    }
+
+    // Start with animation enabled
+    addAnimation();
+});
