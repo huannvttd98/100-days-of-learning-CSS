@@ -1,0 +1,46 @@
+.frame-count {
+  width: 600px;
+  height: 400px;
+  margin: auto;
+  position: relative;
+}
+.center-cont-down {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #dd2d4a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.count-down-text {
+color: #fff;
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  animation: scaleAnim  1s ease-in-out i;
+}
+
+/*  add animation  */
+@keyframes scaleAnim  {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    25%{
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+    75%{
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
