@@ -3,6 +3,10 @@ const arrow = document.getElementById('arrow');
 let touchStartX = 0;
 let isArrowVisible = false;
 let isDragging = false;
+let mouseStartX = 0;
+let mouseDown = false;
+const cardWidth = cardOpen.offsetWidth || 400; // Lấy chiều rộng card (hoặc mặc định 400px)
+const hideThreshold = cardWidth * 0.8; // 80% chiều dài card
 
 // Hover event để hiển thị mũi tên
 cardOpen.addEventListener('mouseenter', (e) => {
@@ -31,8 +35,11 @@ cardOpen.addEventListener('touchmove', (e) => {
     const touchCurrentX = e.touches[0].clientX;
     const diff = touchCurrentX - touchStartX;
 
-    // Nếu kéo sang phải hơn 50px
-    if (diff > 50) {
+    // Thu nhỏ độ rộng card theo khoảng cách kéo
+    cardOpen.style.width = `calc(50% - ${diff}px)`;
+
+    // Nếu kéo quá 80% chiều dài card
+    if (diff > hideThreshold) {
         isDragging = true;
         arrow.classList.remove('show');
         cardOpen.classList.add('hide');
@@ -40,10 +47,14 @@ cardOpen.addEventListener('touchmove', (e) => {
     }
 });
 
-// Mouse drag event (cho desktop)
-let mouseDown = false;
-let mouseStartX = 0;
+cardOpen.addEventListener('touchend', (e) => {
+    // Nếu chưa đến ngưỡng 80%, quay lại vị trí ban đầu
+    if (!cardOpen.classList.contains('hide')) {
+        cardOpen.style.width = '50%';
+    }
+});
 
+// Mouse drag event (cho desktop)
 cardOpen.addEventListener('mousedown', (e) => {
     mouseDown = true;
     mouseStartX = e.clientX;
@@ -55,8 +66,13 @@ cardOpen.addEventListener('mousemove', (e) => {
 
     const diff = e.clientX - mouseStartX;
 
-    if (diff > 50) {
+    // Thu nhỏ độ rộng card theo khoảng cách kéo
+    cardOpen.style.width = `calc(50% - ${diff}px)`;
+
+    // Nếu kéo quá 80% chiều dài card
+    if (diff > hideThreshold) {
         isDragging = true;
+        mouseDown = false;
         arrow.classList.remove('show');
         cardOpen.classList.add('hide');
         isArrowVisible = false;
@@ -65,4 +81,7 @@ cardOpen.addEventListener('mousemove', (e) => {
 
 cardOpen.addEventListener('mouseup', () => {
     mouseDown = false;
+    if (!cardOpen.classList.contains('hide')) {
+        cardOpen.style.width = '50%';
+    }
 });

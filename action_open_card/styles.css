@@ -25,6 +25,7 @@ body{
     height: 100%;
     background-color: lightgray;
     cursor: pointer;
+    transition: transform 0.3s ease;
 }
 .card-open:hover{
     background-color: gray;
