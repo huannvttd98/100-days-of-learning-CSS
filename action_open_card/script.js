@@ -66,16 +66,16 @@ cardOpen.addEventListener('mousemove', (e) => {
 
     const diff = e.clientX - mouseStartX;
 
-    // Thu nhỏ độ rộng card theo khoảng cách kéo
     cardOpen.style.width = `calc(50% - ${diff}px)`;
 
-    // Nếu kéo quá 80% chiều dài card
+
     if (diff > hideThreshold) {
         isDragging = true;
         mouseDown = false;
         arrow.classList.remove('show');
         cardOpen.classList.add('hide');
         isArrowVisible = false;
+        console.log("Show time hide card");
     }
 });
 
