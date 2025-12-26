@@ -6,13 +6,16 @@ let animationElements = [];
 const addAnimation = () => {
     // Clear existing animation elements
     clearAnimation();
+    const boxChart = document.querySelector('.box-chart');
+    const boxRect = boxChart.getBoundingClientRect();
+
     for (let i = 0; i < 30; i++) {
         let d = document.createElement("div");
         d.className = "dot animated-element";
 
-        // Start position at top, random horizontal position
-        d.style.top = "-10px";
-        d.style.left = Math.random() * 100 + "vw";
+        // Start position at top of box-chart, random horizontal position within box
+        d.style.top = (boxRect.top - 10) + "px";
+        d.style.left = (boxRect.left + Math.random() * boxRect.width) + "px";
 
         // Randomize animation duration for both flicker and fall
         const flickerDuration = 1 + Math.random() * 2;
