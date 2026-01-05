@@ -1,66 +1,134 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
-    background: white;
-    border-radius: 20px;
-    padding: 60px 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    max-width: 600px;
-    width: 90%;
+  background: white;
+  border-radius: 20px;
+  padding: 60px 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 600px;
+  width: 90%;
 }
 
 h1 {
-    color: #333;
-    margin-bottom: 40px;
-    font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
 }
 
 .animation-box {
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(45deg, #667eea, #764ba2);
-    border-radius: 10px;
-    margin: 40px auto;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  border-radius: 10px;
+  margin: 40px auto;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
 }
 
 .controls {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 40px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 40px;
 }
 
 .btn {
-    padding: 12px 30px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    font-weight: 600;
+  padding: 12px 30px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-weight: 600;
 }
 
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
 }
 
 .btn:active {
-    transform: translateY(0);
+  transform: translateY(0);
+}
+
+.frame {
+  width: 90%;
+  height: 400px;
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+  border-radius: 10px;
+
+  box-shadow: 0 10px 30px rgba(255, 154, 158, 0.4);
+  margin: auto;
+  position: relative;
+}
+.slide-box {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+  border-radius: 10px;
+}
+.content-tile {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.content-tile h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+.content-tile p {
+  color: #555;
+  line-height: 1.4;
+}
+.countdown-box {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  width: 100%;
+}
+.animated-box {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(45deg, #ff6a00, #ee0979);
+  border-radius: 10px;
+  margin: 40px auto;
+  box-shadow: 0 10px 30px rgba(255, 106, 0, 0.4);
+  text-align: center;
+  line-height: 100px;
+  cursor: pointer;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.button-group .btn {
+  padding: 10px 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
 }

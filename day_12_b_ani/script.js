@@ -1,4 +1,31 @@
-// Anime.js Animation Base Setup
+
+document.querySelector('.animated-box').addEventListener('click', function () {
+    console.log('Box clicked! Starting animation...');
+    anime({
+        targets: '.animated-box',
+        x: {
+            to: '26rem', // Dịch sang phải
+            ease: 'outCubic',
+        },
+        rotate: {
+            to: '2turn', // Quay tròn
+            ease: 'inOutQuad'
+        },
+        opacity: {
+            to: 0, // Ẩn đi
+            ease: 'linear'
+        },
+        duration: 2500,
+        complete: function() {
+            // Reset lại position sau khi animation kết thúc
+            anime.set('.animated-box', {
+                x: 0,
+                rotate: 0,
+                opacity: 1
+            });
+        }
+    });
+});
 
 // Create a basic animation
 const animation = anime({
@@ -11,15 +38,15 @@ const animation = anime({
 });
 
 // Control buttons
-document.getElementById('playBtn').addEventListener('click', () => {
+document.getElementById('start-btn').addEventListener('click', () => {
     animation.play();
 });
 
-document.getElementById('pauseBtn').addEventListener('click', () => {
+document.getElementById('pause-btn').addEventListener('click', () => {
     animation.pause();
 });
 
-document.getElementById('resetBtn').addEventListener('click', () => {
+document.getElementById('reset-btn').addEventListener('click', () => {
     animation.restart();
 });
 
