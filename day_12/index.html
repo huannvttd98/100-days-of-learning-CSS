@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hiệu Ứng Nặn Bài - Card Squeeze Effect</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎴 Hiệu Ứng Nặn Bài (Card Squeeze Effect)</h1>
+
+      <!-- LEVEL 1: Cơ bản - Scale & Rotate -->
+      <section class="level">
+        <h2>Level 1: Cơ bản</h2>
+        <p class="description">Scale nhẹ + Rotate khi hover/click</p>
+        <div class="cards-container level-1">
+          <div class="card card-basic">♠ A</div>
+          <div class="card card-basic">♥ K</div>
+          <div class="card card-basic">♦ Q</div>
+          <div class="card card-basic">♣ J</div>
+        </div>
+      </section>
+
+      <!-- LEVEL 2: Trung bình - Skew & 3D Transform -->
+      <section class="level">
+        <h2>Level 2: Trung bình</h2>
+        <p class="description">Skew + Perspective 3D khi click</p>
+        <div class="cards-container level-2">
+          <div class="card card-intermediate">♠ 10</div>
+          <div class="card card-intermediate">♥ 9</div>
+          <div class="card card-intermediate">♦ 8</div>
+          <div class="card card-intermediate">♣ 7</div>
+        </div>
+      </section>
+
+      <!-- LEVEL 3: Nâng cao - Clip-path Distortion & Animation -->
+      <section class="level">
+        <h2>Level 3: Nâng cao</h2>
+        <p class="description">Distortion với clip-path + Animation theo mouse</p>
+        <div class="cards-container level-3">
+          <div class="card card-advanced">♠</div>
+          <div class="card card-advanced">♥</div>
+          <div class="card card-advanced">♦</div>
+          <div class="card card-advanced">♣</div>
+        </div>
+      </section>
+
+      <!-- FLIP CARD: Lật bài úp -->
+      <section class="level">
+        <h2>🔄 FLIP CARD: Lật Bài</h2>
+        <p class="description">Click để lật bài từ mặt úp sang mặt có ký tự</p>
+        <div class="cards-container level-flip">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">?</div>
+              <div class="flip-card-back">♠ A</div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">?</div>
+              <div class="flip-card-back">♥ K</div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">?</div>
+              <div class="flip-card-back">♦ Q</div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">?</div>
+              <div class="flip-card-back">♣ J</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>💡 Click hoặc drag các lá bài để xem hiệu ứng nặn</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
