@@ -23,13 +23,16 @@ const animation = anime({
 
 const animationHideSlider = anime({
     targets: '.slide-box',
+    rotateY: '90deg',
     translateX: '100%',
-    duration: 800,
+    opacity: 0,
+    duration: 1200,
     easing: 'easeInOutQuad',
     autoplay: false,
     complete: function () {
         anime.set('.slide-box', {
-           opacity: 0
+           opacity: 0,
+           rotateY: '90deg'
         });
     }
 });
