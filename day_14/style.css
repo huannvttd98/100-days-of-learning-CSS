@@ -1,0 +1,27 @@
+
+body{
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+#flipbook{
+    width: 400px;
+    height: 300px;
+    margin: auto;
+}
+.page {
+    width: 400px;
+    height: 300px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.slide-out{
+    opacity: 0;
+}
