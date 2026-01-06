@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Flip Animation with Anime.js</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="book">
+            <div class="book-cover">
+                <h1>Page Flip</h1>
+                <p>Animation with Anime.js</p>
+            </div>
+            <div class="pages-wrapper">
+                <div class="page page-1">
+                    <div class="page-content">
+                        <h2>Page 1</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <div class="page-number">1</div>
+                    </div>
+                </div>
+
+                <div class="page page-2">
+                    <div class="page-content">
+                        <h2>Page 2</h2>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <div class="page-number">2</div>
+                    </div>
+                </div>
+
+                <div class="page page-3">
+                    <div class="page-content">
+                        <h2>Page 3</h2>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        <div class="page-number">3</div>
+                    </div>
+                </div>
+
+                <div class="page page-4">
+                    <div class="page-content">
+                        <h2>Page 4</h2>
+                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <div class="page-number">4</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="prevBtn" class="btn btn-prev">← Previous</button>
+            <span id="pageIndicator" class="page-indicator">Cover</span>
+            <button id="nextBtn" class="btn btn-next">Next →</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
