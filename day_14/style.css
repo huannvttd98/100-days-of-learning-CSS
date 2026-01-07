@@ -7,11 +7,7 @@ body{
     height: 100vh;
     margin: 0;
 }
-#flipbook{
-    width: 400px;
-    height: 300px;
-    margin: auto;
-}
+
 .page {
     width: 400px;
     height: 300px;
@@ -24,4 +20,7 @@ body{
 }
 .slide-out{
     opacity: 0;
+}
+.hidden-page{
+    display: none;
 }
