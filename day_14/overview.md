@@ -161,4 +161,6 @@ $('.book').bind('turned', function(e, page) {
 ---
 
 ## Tóm tắt
-Turn.js là một thư viện mạnh mẽ cho phép tạo trải nghiệm lật trang tương tác, giống như đọc sách thực. Nó kết hợp CSS 3D, JavaScript events, và gradient dynamics để tạo hiệu ứng thực tế, hỗ trợ cả desktop (mouse) lẫn mobile (touch).
+Turn.js là một thư viện mạnh mẽ cho phép tạo trải nghiệm lật trang tương tác,
+ giống như đọc sách thực. Nó kết hợp CSS 3D, JavaScript events,
+ và gradient dynamics để tạo hiệu ứng thực tế, hỗ trợ cả desktop (mouse) lẫn mobile (touch).

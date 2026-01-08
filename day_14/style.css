@@ -1,11 +1,15 @@
 
 body{
-    background-color: #f0f0f0;
+
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+}
+.book{
+    background-color: rebeccapurple;
+    border: 1px solid black;
 }
 
 .page {
@@ -17,6 +21,9 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+.page1{
 }
 .slide-out{
     opacity: 0;
