@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YOU WIN - Canvas Coin Effect</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Canvas for coin animation -->
+        <canvas id="coinCanvas" class="coin-canvas"></canvas>
+
+        <!-- YOU WIN message -->
+        <div class="win-message">
+            <h1 class="win-text">YOU WIN</h1>
+            <p class="win-subtitle">Chúc mừng bạn!</p>
+        </div>
+
+        <!-- Profit display -->
+        <div class="profit-display">
+            <span class="profit-amount">+$1,000.00</span>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="actions">
+            <button class="btn btn-primary" onclick="playAgain()">Chơi lại</button>
+            <button class="btn btn-secondary" onclick="goHome()">Về trang chủ</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
