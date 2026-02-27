@@ -63,7 +63,7 @@ const frontMaterial = new THREE.MeshStandardMaterial({
 
 // Back Material
 const backMaterial = new THREE.MeshStandardMaterial({
-    map: backTexture,
+    color: 0xffffff,
     side: THREE.BackSide,
     roughness: 0.8,
     metalness: 0.0, // Paper is matte
@@ -72,7 +72,7 @@ const backMaterial = new THREE.MeshStandardMaterial({
 // Front Mesh
 const pageMesh = new THREE.Mesh(geometry, frontMaterial);
 pageMesh.castShadow = true;
-pageMesh.receiveShadow = true;
+pageMesh.receiveShadow = false;
 scene.add(pageMesh);
 
 // Back Mesh (Sharing same geometry for synced deformation)
@@ -174,8 +174,8 @@ function updateFold() {
 
     const dist = dragVector.length();
 
-    // Check if drag exceeds 90% of page width
-    if (dist > PAGE_WIDTH * 0.9) {
+    // Check if drag exceeds 75% of page width
+    if (dist > PAGE_WIDTH * 0.75) {
         canvasContainer.style.display = 'none';
         isDragging = false;
         return;
@@ -302,3 +302,23 @@ function animate() {
 }
 // Start loop
 animate();
+
+// Add event listener to the "Change Image" button
+const changeImageBtn = document.getElementById('change-image-btn');
+if (changeImageBtn) {
+    changeImageBtn.addEventListener('click', () => {
+        console.log('Changing image...');
+        // Generate a new random image URL
+        const newImageUrl = `https://picsum.photos/600/900?random=${Math.floor(Math.random() * 10000)}`;
+
+        // Load the new texture
+        textureLoader.load(newImageUrl, (texture) => {
+            // Ensure proper encoding
+            texture.encoding = THREE.sRGBEncoding;
+
+            // Update the front material map
+            pageMesh.material.map = texture;
+            pageMesh.material.needsUpdate = true;
+        });
+    });
+}

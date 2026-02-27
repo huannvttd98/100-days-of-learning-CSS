@@ -85,3 +85,16 @@ body {
   border-radius: 5px;
   z-index: 100;
 }
+
+#change-image-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 120px;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  z-index: 100;
+}
