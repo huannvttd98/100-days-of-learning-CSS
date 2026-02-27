@@ -1,21 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3D Page Curl WebGL (8 Directions)</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="instructions">
-        <h2>3D Page Curl</h2>
-        <p>Drag the page corner to curl it.</p>
-        <p>Snaps to 8 directions.</p>
-    </div>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <button id="reset-btn">Reset</button>
-    <div id="canvas-container"></div>
-    <!-- Import Three.js from CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <div class="frame-game">
+      <div id="canvas-container"></div>
+    </div>
+    <script src="three.min.js"></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

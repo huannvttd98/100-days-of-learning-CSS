@@ -39,38 +39,17 @@ const geometry = new THREE.PlaneGeometry(PAGE_WIDTH, PAGE_HEIGHT, SEGMENTS_X, SE
 // Store original vertex positions
 const originalPositions = geometry.attributes.position.clone();
 
-// Add a simple texture or pattern to make the curl visible
-function createPageTexture(color, text) {
-    const canvas = document.createElement('canvas');
-    canvas.width = 512;
-    canvas.height = 768;
-    const ctx = canvas.getContext('2d');
+// Load textures
+const textureLoader = new THREE.TextureLoader();
 
-    // Background
-    ctx.fillStyle = color;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+// Replace with your local image paths (e.g., 'assets/page1.jpg')
+// Using placeholder images for demonstration
+const frontTexture = textureLoader.load('https://picsum.photos/600/900?random=1');
+const backTexture = textureLoader.load('https://picsum.photos/600/900?random=2');
 
-    // Lines/Text simulation
-    ctx.fillStyle = '#111';
-    ctx.font = 'bold 40px Arial';
-    ctx.fillText(text, 40, 60);
-
-    ctx.fillStyle = '#666';
-    for (let i = 100; i < canvas.height - 40; i += 30) {
-        ctx.fillRect(40, i, canvas.width - 80, 2);
-    }
-
-    // Border
-    ctx.strokeStyle = '#333';
-    ctx.lineWidth = 10;
-    ctx.strokeRect(0,0, canvas.width, canvas.height);
-
-    const texture = new THREE.CanvasTexture(canvas);
-    return texture;
-}
-
-const frontTexture = createPageTexture('#fdfdfd', 'Front Page - Drag corner!');
-const backTexture = createPageTexture('#e0e0e0', 'Back Page');
+// Configure textures
+frontTexture.encoding = THREE.sRGBEncoding;
+backTexture.encoding = THREE.sRGBEncoding;
 backTexture.wrapS = THREE.RepeatWrapping;
 backTexture.repeat.x = -1; // Mirror texture horizontally for readable back page
 
