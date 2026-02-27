@@ -1,6 +1,6 @@
 // Initialize Three.js Scene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x333333);
+scene.background = new THREE.Color(0xffffff);
 
 // Camera setup
 const canvasContainer = document.getElementById('canvas-container');
@@ -228,32 +228,9 @@ function updateFold() {
 
     foldNormal.set(Math.cos(snappedAngle), Math.sin(snappedAngle), 0);
 
-    // We want the fold to start from the dragged point?
-    // Or rather the 'spine' of the fold is perpendicular to drag,
-    // located somewhere between start and current.
-    // Let's define the 'foldOrigin' (point zero of the deformation)
-    // as moving with the drag.
-    // A simple approximation for proper curl visuals:
-    // The fold line moves along the drag vector.
-
-    // Let's set foldOrigin to currentPoint.
-    // The logic inside updateGeometry loop maps distance from this line.
     foldOrigin.set(currentPoint.x, currentPoint.y, 0);
 
-    // If I drag Point A to Point B.
-    // The Page material at A should now look like it is at B?
-    // With my current logic:
-    // Vertex A is at 'startPoint'. Origin is 'currentPoint'.
-    // vector = A - B. length = dist.
-    // dot(A-B, Normal). Normal points B->A? or A->B?
-    // If Normal is Drag (A->B).
-    // Then (A - B) dot (B-A) is negative.
-    // dist < 0. No fold.
-    // So Normal must prevent this?
-    // If Normal is opposite Drag: (B-A) -> (A-B).
-    // dot(A - B, A - B) is positive.
-    // distance > 0. A folds.
-    // So foldNormal should be NEGATIVE of Drag Direction.
+
 
     foldNormal.set(-Math.cos(snappedAngle), -Math.sin(snappedAngle), 0);
 

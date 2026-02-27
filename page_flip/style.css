@@ -1,39 +1,75 @@
 body {
-    margin: 0;
-    overflow: hidden;
-    background-color: #333; /* Dark background to see the page clearly */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  overflow: hidden;
+  background-color: #333; /* Dark background to see the page clearly */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #canvas-container {
-    width: 100vw;
-    height: 100vh;
-    display: block;
+  width: 100vw;
+  height: 100vh;
+  display: block;
 }
 
 #instructions {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    color: white;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 15px;
-    border-radius: 8px;
-    max-width: 300px;
-    pointer-events: none; /* Let clicks pass through to canvas */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 15px;
+  border-radius: 8px;
+  max-width: 300px;
+  pointer-events: none; /* Let clicks pass through to canvas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
-    margin-top: 0;
-    font-size: 1.2rem;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    padding-bottom: 8px;
+  margin-top: 0;
+  font-size: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 8px;
 }
 
 p {
-    margin: 5px 0;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    color: #ddd;
+  margin: 5px 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #ddd;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+#canvas-container {
+  width: 100vw;
+  height: 100vh;
+  cursor: pointer;
+  background-color: #fff;
+  touch-action: none; /* Critical for touch devices */
+}
+#instructions {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  font-family: sans-serif;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+}
+#reset-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  z-index: 100;
 }
