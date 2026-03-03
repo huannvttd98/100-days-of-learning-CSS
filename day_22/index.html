@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Page Fold Effect - CSS thuần</title>
+<style>
+  body { margin:0; height:100vh; display:flex; align-items:center; justify-content:center; background:#111; font-family:Arial; }
+  .card {
+    width: 420px; height: 520px;
+    position: relative;
+    background: #fff;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    overflow: hidden;
+    perspective: 2000px;
+  }
+  .content {
+    position: absolute; inset: 0;
+    padding: 40px; box-sizing: border-box;
+    background: linear-gradient(#f9f9f9, #fff);
+    z-index: 1;
+  }
+  .fold-container {
+    position: absolute; top: 0; right: 0;
+    width: 230px; height: 230px;
+    transform-origin: 100% 0%;
+    transform-style: preserve-3d;
+    z-index: 2;
+  }
+  .fold {
+    position: absolute; inset: 0;
+    transform-style: preserve-3d;
+    clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
+    backface-visibility: hidden;
+  }
+  .fold-front {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #f0f0f0, #fff 50%, #e0e0e0);
+    box-shadow: inset -40px 40px 60px rgba(0,0,0,0.35);
+  }
+  .fold-back {
+    position: absolute; inset: 0;
+    background: #1e2a44;
+    transform: rotateY(180deg);
+  }
+  .fold-shadow {
+    position: absolute; inset: 0;
+    background: linear-gradient(to left, rgba(0,0,0,0.7) 0%, transparent 70%);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <div class="content">
+    <h2>Nội dung trang chính</h2>
+    <p>Kéo góc trên bên phải để gập. Thả chuột sẽ tự reset với easing.</p>
+  </div>
+
+  <div class="fold-container" id="foldContainer">
+    <div class="fold">
+      <div class="fold-front"></div>
+      <div class="fold-back"></div>
+    </div>
+    <div class="fold-shadow" id="shadow"></div>
+  </div>
+</div>
+
+<script>
+const card = document.getElementById('card');
+const foldContainer = document.getElementById('foldContainer');
+const shadow = document.getElementById('shadow');
+let isDragging = false;
+let startX, startY;
+
+function calculateAngle(clientX, clientY) {
+  const rect = card.getBoundingClientRect();
+  const cornerX = rect.right;
+  const cornerY = rect.top;
+  const dx = clientX - cornerX;
+  const dy = clientY - cornerY;
+  const dist = Math.hypot(dx, dy);
+  return Math.min(68, Math.max(0, dist * 0.23)); // giới hạn tối đa ~68°
+}
+
+card.addEventListener('mousedown', e => {
+  const rect = card.getBoundingClientRect();
+  const dx = e.clientX - rect.right;
+  const dy = e.clientY - rect.top;
+  if (Math.hypot(dx, dy) < 200) { // vùng kích hoạt gần góc
+    isDragging = true;
+    startX = e.clientX; startY = e.clientY;
+    foldContainer.style.transition = 'none';
+  }
+});
+
+document.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  const angle = calculateAngle(e.clientX, e.clientY);
+  foldContainer.style.transform = `rotateY(-${angle}deg)`;
+  shadow.style.opacity = 0.3 + (angle / 68) * 0.55; // shadow động
+});
+
+document.addEventListener('mouseup', () => {
+  if (!isDragging) return;
+  isDragging = false;
+  foldContainer.style.transition = 'transform 0.65s cubic-bezier(0.25, 0.1, 0.25, 1)';
+  foldContainer.style.transform = 'rotateY(0deg)';
+  shadow.style.opacity = '0.3';
+});
+</script>
+</body>
+</html>
