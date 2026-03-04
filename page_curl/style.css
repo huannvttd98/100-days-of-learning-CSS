@@ -1,0 +1,57 @@
+body {
+    background-color: #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    perspective: 1000px;
+}
+
+.paper {
+    background-color: white;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Base curl styling */
+.curl-corner {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    background: linear-gradient(135deg, white 45%, #aaa 50%, #ccc 56%, white 80%);
+    box-shadow: -5px -5px 10px rgba(0, 0, 0, 0.2);
+    transition: width 0.5s ease, height 0.5s ease;
+}
+
+/* Hover effect */
+.paper:hover .curl-corner {
+    width: 100px;
+    height: 100px;
+}
+
+/* The revealed part underneath (simulated) */
+.paper::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(to top left, transparent 50%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0.2) 60%);
+    width: 0;
+    height: 0;
+    z-index: 10;
+    pointer-events: none;
+    transition: width 0.5s ease, height 0.5s ease;
+}
+
+.paper:hover::before {
+    width: 100px;
+    height: 100px;
+}

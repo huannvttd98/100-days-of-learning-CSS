@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Page Curl Variations</title>
+    <style>
+        body {
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            justify-content: center;
+        }
+
+        /* Base Paper Styles */
+        .paper {
+            width: 250px;
+            height: 300px;
+            background: white;
+            position: relative;
+            padding: 30px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /* Basic shadow for depth */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            margin: 0;
+        }
+
+        /*
+           1. Top-Right Fold (Dog Ear)
+           Fixed sizing to match the gradient cut.
+           S = Leg size of the fold. Let S = 50px.
+           Gradient cut position P = S * sin(45) = 50 * 0.707 = 35.35px.
+           Use 35.5px to cover sub-pixel gaps.
+        */
+        .fold-corner {
+            /* Cut the top-right corner */
+            background: linear-gradient(225deg, transparent 35.5px, #ffffff 35.5px);
+            /* Add a drop shadow to the main shape */
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+        }
+
+        .fold-corner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            /*
+               Triangle at Bottom-Left of the 50x50 box.
+               border-bottom = colored (fills bottom).
+               border-right = transparent (cuts diagonal).
+            */
+            border-bottom: 50px solid #ddd;
+            border-right: 50px solid transparent;
+
+            /* Shadow under the fold */
+            box-shadow: -5px 5px 10px rgba(0,0,0,0.2);
+        }
+
+
+        /*
+           2. Bottom-Right Curl (Peel)
+           Fixed sizing. Using same S = 50px.
+           Cut angle: -45deg or 315deg (Bottom-Right).
+           Gradient P = 35.5px.
+        */
+        .peel-corner {
+            /*
+               Variables for interactive peel:
+               --peel-size: Size of the peel (default 50px).
+               --cut-pos: Calculated. 50px * 0.707 = 35.35px.
+            */
+            --peel-size: 50px;
+            --cut-pos: 35.5px;
+
+            /* Cut bottom-right corner */
+            background: linear-gradient(-45deg, transparent var(--cut-pos), #ffffff var(--cut-pos));
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+
+            /* No transition on peel-size for "draw" feel, or very fast */
+            /* transition: background 0.1s; */
+        }
+
+        .peel-corner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: var(--peel-size);
+            height: var(--peel-size);
+
+            background: linear-gradient(135deg, #eee 50%, transparent 50%);
+
+            /* Shadow makes it look raised */
+            box-shadow: -4px -4px 10px rgba(0,0,0,0.2);
+
+            /* Add curvature to the peel tip (inner corner) */
+            border-bottom-left-radius: 10px;
+
+            /* pointer-events: none; so mousemove doesn't jitter on the curl itself */
+            pointer-events: none;
+        }
+
+        /*
+           3. Realistic Lifted Corners (Shadow Effect)
+           This doesn't cut the paper but creates a shadow underneath
+           to simulate the paper hovering or curling up.
+        */
+        .lifted-corners {
+            position: relative;
+            background: #fff;
+        }
+
+        /* Create two skewed shadows behind the paper */
+        .lifted-corners::before,
+        .lifted-corners::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            bottom: 12px;
+            left: 10px;
+            width: 50%;
+            height: 20%;
+            max-width: 300px;
+            /* The shadow itself */
+            box-shadow: 0 15px 10px rgba(0, 0, 0, 0.5);
+            /* Rotate to create the corner lift */
+            transform: rotate(-3deg);
+        }
+
+        .lifted-corners::after {
+            right: 10px;
+            left: auto; /* Reset left */
+            transform: rotate(3deg);
+        }
+
+        /*
+           4. Large Reveal Peel (CSS & Gradient)
+           Mimics a large peel revealing the "back".
+        */
+        .large-peel {
+             position: relative;
+             /* Gradient from top-left white to transparent bottom-right */
+             background: linear-gradient(135deg, white 70%, transparent 70%);
+             overflow: hidden; /* Hide the square box shadow if necessary, but filter is better */
+             filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.2));
+             /* To fix the transparent background issue if body is not white */
+        }
+
+        .large-peel::after {
+            content: '';
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            /* Calculate size based on the 70% cut */
+            /* 250px width * 30% = 75px approx */
+            width: 75px;
+            height: 75px;
+            /* Gradient for the folded back */
+            background: linear-gradient(to top left, #f1f1f1 50%, #d1d1d1 100%);
+            box-shadow: -5px -5px 12px rgba(0,0,0,0.2);
+            border-top-left-radius: 10px; /* Curve the fold */
+
+            /*
+               The gap is a headache with linear-gradient method if background isn't matching.
+               (Here body is grey, so transparent hole shows grey, which is correct).
+            */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Variation 1 -->
+        <div class="paper fold-corner">
+            <h3>Folded Corner</h3>
+            <p>Top-right fold using borders</p>
+        </div>
+
+        <!-- Variation 2 -->
+        <div class="paper peel-corner">
+            <h3>Peeled Corner</h3>
+            <p>Bottom-right peel</p>
+        </div>
+
+        <!-- Variation 3 -->
+        <div class="paper lifted-corners">
+            <h3>Lifted Corners</h3>
+            <p>Shadow effect only</p>
+        </div>
+
+    </div>
+    <script>
+        const peelPaper = document.querySelector('.peel-corner');
+
+        // Max peel size constraint
+        const MAX_PEEL = 150;
+        const MIN_PEEL = 50;
+
+        peelPaper.addEventListener('mousemove', (e) => {
+            const rect = peelPaper.getBoundingClientRect();
+            // Calculate mouse position relative to Bottom-Right corner
+            // x = distance from right edge
+            const x = rect.right - e.clientX;
+            // y = distance from bottom edge
+            const y = rect.bottom - e.clientY;
+
+            // Simple heuristic: Peel size matches the largest distance from corner
+            // Or average. Let's try max to ensure it covers the cursor.
+            let size = Math.max(x, y);
+
+            // Add a little offset so the cursor is slightly "under" the curl
+            size += 20;
+
+            if (size > MAX_PEEL) size = MAX_PEEL;
+            if (size < MIN_PEEL) size = MIN_PEEL;
+
+            // Calculate the cut position for the gradient (size * sin(45))
+            // 0.7071 is approx sin(45)
+            const cutPos = size * 0.7071;
+
+            // Update CSS variables
+            peelPaper.style.setProperty('--peel-size', size + 'px');
+            peelPaper.style.setProperty('--cut-pos', cutPos + 'px');
+        });
+
+        peelPaper.addEventListener('mouseleave', () => {
+            // Reset to default on leave
+            peelPaper.style.setProperty('--peel-size', '50px');
+            const defaultCut = 50 * 0.7071;
+            peelPaper.style.setProperty('--cut-pos', defaultCut + 'px'); // or 35.5px
+        });
+    </script>
+</body>
+</html>

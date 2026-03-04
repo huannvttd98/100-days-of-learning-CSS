@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8 Direction Interactive Page Curl</title>
+    <style>
+        body {
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+        }
+
+        .paper {
+            width: 200px;
+            height: 200px;
+            background: white;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #555;
+            /* box-shadow: 0 5px 15px rgba(0,0,0,0.3); */
+            /* Define variables with defaults */
+            --peel-size: 0px;
+            --cut-pos: 0px;
+        }
+
+        /* -------------------------------------------------------------
+           CORNERS (Using Linear Gradient Cuts)
+           Formula for Gradient Cut Position (P): P = Size * sin(45) ≈ Size * 0.707
+           Formula for Corner Box Size: Size (width/height)
+           ------------------------------------------------------------- */
+
+        .paper::after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+            transition: width 0.05s, height 0.05s;
+        }
+
+        /* 1. TOP LEFT (NW) */
+        .curl-nw {
+            background: linear-gradient(135deg, transparent var(--cut-pos), #ffffff var(--cut-pos));
+        }
+        .curl-nw::after {
+            top: 0; left: 0;
+            width: var(--peel-size); height: var(--peel-size);
+            background: linear-gradient(-45deg, #eee 50%, transparent 50%);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            border-bottom-right-radius: 10px;
+        }
+
+        /* 2. TOP RIGHT (NE) */
+        .curl-ne {
+            /* background: linear-gradient(225deg, transparent var(--cut-pos), #ffffff var(--cut-pos)); */
+        }
+        .curl-ne::after {
+            top: 0; right: 0;
+            width: var(--peel-size); height: var(--peel-size);
+            background: linear-gradient(-135deg, #eee 50%, transparent 50%);
+            box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
+            border-bottom-left-radius: 10px;
+        }
+
+        /* 3. BOTTOM RIGHT (SE) */
+        .curl-se {
+            background: linear-gradient(315deg, transparent var(--cut-pos), #ffffff var(--cut-pos)); /* -45deg */
+        }
+        .curl-se::after {
+            bottom: 0; right: 0;
+            width: var(--peel-size); height: var(--peel-size);
+            background: linear-gradient(135deg, #eee 50%, transparent 50%);
+            box-shadow: -2px -2px 5px rgba(0,0,0,0.2);
+            border-top-left-radius: 10px;
+        }
+
+        /* 4. BOTTOM LEFT (SW) */
+        .curl-sw {
+            background: linear-gradient(45deg, transparent var(--cut-pos), #ffffff var(--cut-pos));
+        }
+        .curl-sw::after {
+            bottom: 0; left: 0;
+            width: var(--peel-size); height: var(--peel-size);
+            background: linear-gradient(45deg, #eee 50%, transparent 50%);
+            box-shadow: 2px -2px 5px rgba(0,0,0,0.2);
+            border-top-right-radius: 10px;
+        }
+
+        /* -------------------------------------------------------------
+           EDGES (Using Linear Gradient Cuts & Rectangular Flaps)
+           Edge cut is direct size. P = Size.
+           ------------------------------------------------------------- */
+
+        /* 5. TOP (N) */
+        .curl-n {
+            background: linear-gradient(180deg, transparent var(--peel-size), #ffffff var(--peel-size));
+        }
+        .curl-n::after {
+            top: 0; left: 0;
+            width: 100%; height: var(--peel-size);
+            background: linear-gradient(0deg, #eee, #ddd); /* Simple gradient for back */
+            transform-origin: top;
+            /* To look like a fold down, we just place it there?
+               Usually it's rotated X, but simple gradient block works for flat style
+            */
+            background: #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            /* Optional: Make it look like it's flipping over */
+            /* transform: rotateX(180deg); This would flip it up/behind? No. */
+        }
+
+        /* 6. RIGHT (E) */
+        .curl-e {
+            background: linear-gradient(270deg, transparent var(--peel-size), #ffffff var(--peel-size));
+        }
+        .curl-e::after {
+            top: 0; right: 0;
+            width: var(--peel-size); height: 100%;
+            background: #eee;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+        }
+
+        /* 7. BOTTOM (S) */
+        .curl-s {
+            background: linear-gradient(0deg, transparent var(--peel-size), #ffffff var(--peel-size));
+        }
+        .curl-s::after {
+            bottom: 0; left: 0;
+            width: 100%; height: var(--peel-size);
+            background: #eee;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* 8. LEFT (W) */
+        .curl-w {
+            background: linear-gradient(90deg, transparent var(--peel-size), #ffffff var(--peel-size));
+        }
+        .curl-w::after {
+            top: 0; left: 0;
+            width: var(--peel-size); height: 100%;
+            background: #eee;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        }
+
+        /* Empty center cell */
+        .center-cell {
+            visibility: hidden;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="paper curl-nw" data-type="NW">NW</div>
+        <div class="paper curl-n" data-type="N">N</div>
+        <div class="paper curl-ne" data-type="NE">NE</div>
+
+        <div class="paper curl-w" data-type="W">W</div>
+        <div class="paper" style="visibility: hidden;"></div>
+        <div class="paper curl-e" data-type="E">E</div>
+
+        <div class="paper curl-sw" data-type="SW">SW</div>
+        <div class="paper curl-s" data-type="S">S</div>
+        <div class="paper curl-se" data-type="SE">SE</div>
+    </div>
+
+    <script>
+        const papers = document.querySelectorAll('.paper');
+
+        papers.forEach(p => {
+            const direction = p.getAttribute('data-type');
+            if(!direction) return; // Skip center empty cell
+
+            p.addEventListener('mousemove', (e) => {
+                const rect = p.getBoundingClientRect();
+                // Coords relative to the element (0,0 is top-left)
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const w = rect.width;
+                const h = rect.height;
+
+                let size = 0;
+
+                // Calculate "Peel Size" based on cursor content
+                switch(direction) {
+                    case 'NW': // Top Left
+                        size = Math.max(x, y);
+                        break;
+                    case 'NE': // Top Right
+                        size = Math.max(w - x, y);
+                        break;
+                    case 'SE': // Bottom Right
+                        size = Math.max(w - x, h - y);
+                        break;
+                    case 'SW': // Bottom Left
+                        size = Math.max(x, h - y);
+                        break;
+                    case 'N': // Top Edge
+                        size = y;
+                        break;
+                    case 'S': // Bottom Edge
+                        size = h - y;
+                        break;
+                    case 'W': // Left Edge
+                        size = x;
+                        break;
+                    case 'E': // Right Edge
+                        size = w - x;
+                        break;
+                }
+
+                // Offset to ensure cursor is covered by the curl
+                size += 10;
+
+                // Constraints
+                if (size > 120) size = 120;
+                if (size < 0) size = 0;
+
+                // Update CSS Variables
+                p.style.setProperty('--peel-size', size + 'px');
+
+                // Position logic:
+                // Corners use diagonal cut (size * sin(45))
+                // Edges use straight cut (size)
+                if(['NW', 'NE', 'SE', 'SW'].includes(direction)) {
+                     p.style.setProperty('--cut-pos', (size * 0.7071) + 'px');
+                } else {
+                     p.style.setProperty('--cut-pos', size + 'px');
+                }
+            });
+
+            p.addEventListener('mouseleave', () => {
+                p.style.setProperty('--peel-size', '0px');
+                p.style.setProperty('--cut-pos', '0px');
+            });
+        });
+    </script>
+</body>
+</html>

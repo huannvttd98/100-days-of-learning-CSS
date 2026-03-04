@@ -1,0 +1,172 @@
+body {
+    background: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 20px;
+}
+
+/*
+   BASE PAPER STYLE
+*/
+.paper {
+    width: 200px;
+    height: 250px;
+    background: white;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    /* No overflow: hidden, so the curl can extend out if needed, or shadow can show */
+}
+
+.content {
+    color: #444;
+}
+
+/*
+   STYLE 1: Simple Cut Corner with Fold
+   The 'dog-ear' effect using borders
+*/
+.curl-bottom-right {
+    background: #fdfdfd;
+}
+
+.curl-bottom-right::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-width: 0 0 40px 40px; /* Size of the curl */
+    border-style: solid;
+    border-color: transparent #fff #ccc transparent;
+    /*
+       The colors here are tricky:
+       First transparent: top border (none)
+       Second #fff: right border (the back of the page, facing up) -> NO, this is wrong.
+
+       Let's re-think the border triangle method.
+       Border-width: vertical horizontal.
+       If we want bottom-right corner:
+       top-border: 0
+       right-border: 0
+       bottom-width: X
+       left-width: X
+    */
+    border-width: 40px 40px 0 0; /* height width ... */
+    /* Actually, a better way for bottom-right corner: */
+    border-width: 20px; /* size */
+    border-style: solid;
+    /* Bottom right triangle needs to be the 'page back' color, others transparent? No. */
+}
+
+/*
+   Let's use the Linear Gradient Method - It's cleaner for "peel"
+*/
+.style-peel {
+    /*
+       1. Cut the corner of the main element
+       -135deg (or 225deg) is bottom-right.
+       transparent at the very corner.
+    */
+    background: linear-gradient(
+        -135deg,
+        transparent 30px,
+        white 30px
+    );
+}
+
+.style-peel::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+
+    /* Create the folded triangle */
+    /*
+       We use borders to make a triangle.
+       The "fold" is a triangle that sits in the empty space.
+       For a 30px cut, the fold is approx 42px diagonal, or just match the leg size.
+       Leg size is 30px.
+    */
+    border-top: 30px solid transparent; /* Side attached to vertical */
+    border-left: 30px solid #ddd; /* The curl color (back of paper) */
+
+    /* Add a shadow for depth */
+    box-shadow: -5px -5px 10px rgba(0,0,0,0.2);
+
+    /*
+       Wait, border method produces a triangle with a right angle at top-left.
+       Position: bottom: 0, right: 0.
+       border-top: 30px solid transparent -> pushes content down
+       border-left: 30px solid color -> draws the box
+    */
+    border-top: 30px solid transparent; /* Top-right part is transparent */
+    border-left: 30px solid #e0e0e0; /* Bottom-left part is the paper back */
+
+    /* Corner radius to make it look realistic */
+    border-bottom-left-radius: 5px;
+
+    /* Adjust position slightly if needed or just 0 0 */
+}
+
+
+/*
+   STYLE 2: Smooth Gradient Curl
+   More realistic, using a rotated pseudo-element
+*/
+.style-smooth {
+    background: white;
+}
+
+.style-smooth::before {
+    content: '';
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, transparent 45%, #aaa 50%, #ccc 56%, white 80%);
+    box-shadow: -5px -5px 10px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+/*
+   STYLE 3: The "classic" shadow curl (lifting the page)
+   This uses ::before and ::after behind the element
+*/
+.style-lifted {
+    position: relative;
+    background: #fff;
+}
+
+.style-lifted::before, .style-lifted::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    height: 20%;
+    max-width: 300px;
+    background: transparent;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+    transform: rotate(-3deg);
+}
+
+.style-lifted::after {
+    right: 10px;
+    left: auto;
+    transform: rotate(3deg);
+}
